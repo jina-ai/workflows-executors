@@ -21,7 +21,7 @@ on:
 
 jobs:
   call-external:
-    uses: jina-ai/.github/.github/workflows/cd.yml@master
+    uses: jina-ai/workflows-executors/.github/workflows/cd.yml@master
     with:
       event_name: ${{ github.event_name }}
     secrets:
@@ -37,5 +37,5 @@ on: [pull_request]
 
 jobs:
   call-external:
-    uses: jina-ai/.github/.github/workflows/ci.yml@master
+    uses: jina-ai/workflows-executors/.github/workflows/ci.yml@master
 ```
