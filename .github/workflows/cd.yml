@@ -35,14 +35,14 @@ jobs:
       - name: push to Hubble
         if: ${{ inputs.event_name == 'release' }}
         id: push_exec_custom
-        run: echo `pwd` && echo `ls -la`
-        # run: bash .github/workflows/scripts/push.sh ${{ steps.previous_tag_custom.outputs.tag }} .
+        uses: jina-ai/action-hubble-push@fix-exit-codes
         env:
+          git_tag: ${{ steps.previous_tag_custom.outputs.tag }}
           exec_secret: ${{ secrets.secret }}
       - name: push to Hubble
         if: ${{ inputs.event_name != 'release' }}
         id: push_exec_action
-        run: echo `pwd` && echo `ls -la`
-        # run: bash .github/workflows/scripts/push.sh ${{ steps.previous_tag_action.outputs.tag }} .
+        uses: jina-ai/action-hubble-push@fix-exit-codes
         env:
+          git_tag: ${{ steps.previous_tag_action.outputs.tag }}
           exec_secret: ${{ secrets.secret }}
