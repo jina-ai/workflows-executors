@@ -37,12 +37,14 @@ jobs:
         id: push_exec_custom
         uses: jina-ai/action-hubble-push@v4
         env:
-          git_tag: ${{ steps.previous_tag_custom.outputs.tag }}
           exec_secret: ${{ secrets.secret }}
+        with:
+          git_tag: ${{ steps.previous_tag_custom.outputs.tag }}
       - name: push to Hubble
         if: ${{ inputs.event_name != 'release' }}
         id: push_exec_action
         uses: jina-ai/action-hubble-push@v4
         env:
-          git_tag: ${{ steps.previous_tag_action.outputs.tag }}
           exec_secret: ${{ secrets.secret }}
+        with:
+          git_tag: ${{ steps.previous_tag_action.outputs.tag }}
