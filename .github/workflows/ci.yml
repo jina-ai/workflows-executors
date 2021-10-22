@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: "3.7"
+      - name: Pre-test script
+        run: |
+          if [[ -f "tests/pre_test.sh" ]]; then
+            bash tests/pre_test.sh; fi
       - name: Install latest stable 2.x jina version
         run: |
           JINA_VERSION=$(curl -L -s "https://pypi.org/pypi/jina/json" \
