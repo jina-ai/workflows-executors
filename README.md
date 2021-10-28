@@ -2,7 +2,13 @@
 
 Call these workflows remotely from your Executor's repo
 
-1. Add your secret as `EXECUTOR_SECRET` (or whatever you want to call it)
+## Add via workflow template
+1. Add your secret as `EXECUTOR_SECRET`
+2. Follow the instructions at [Jina Workflow Templates](https://github.com/jina-ai/.github)
+
+## Add via copy-paste
+
+1. Add your secret as `EXECUTOR_SECRET`
 2. add `.github/workflows/cd.yml` with the following:
 
 ```yaml
