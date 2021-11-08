@@ -45,3 +45,15 @@ jobs:
   call-external:
     uses: jina-ai/workflows-executors/.github/workflows/ci.yml@master
 ```
+
+4. [optional] add `.github/workflows/ci-gpu.yml` with the following:
+
+```yaml
+name: CI-GPU
+
+on: [pull_request]
+
+jobs:
+  call-external:
+    uses: jina-ai/workflows-executors/.github/workflows/ci-gpu.yml@master
+```
