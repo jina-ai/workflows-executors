@@ -40,7 +40,7 @@ jobs:
             jinahub/hubble-normalizer:latest normalize . --jina-version=2
             sudo chown -R $(id -u ${USER}):$(id -g ${USER}) . ; fi
       - name: Run unit tests
-        run: pytest -s -v -m "not gpu"
+        run: python -m pytest -s -v -m "not gpu"
       - id: test_docker
         name: run docker tests
         uses: jina-ai/action-hubble-test-docker@v5
