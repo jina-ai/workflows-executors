@@ -12,12 +12,12 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: "3.7"
-      - name: Install latest stable 2.x jina version
+      - name: Install latest stable 3.x jina version
         run: |
           JINA_VERSION=$(curl -L -s "https://pypi.org/pypi/jina/json" \
             |  jq  -r '.releases | keys | .[]
-              | select(contains("dev") | not)
-              | select(startswith("2."))' \
+              | select(contains("dev"))
+              | select(startswith("3."))' \
             | sort -V | tail -1)
           pip install git+https://github.com/jina-ai/jina.git@v${JINA_VERSION}
       - name: Python requirements
