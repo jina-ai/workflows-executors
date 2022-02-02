@@ -19,14 +19,14 @@ jobs:
         run: |
           if [[ -f "tests/pre_test.sh" ]]; then
             bash tests/pre_test.sh; fi
-      - name: Install latest stable 2.x jina version
+      - name: Install latest stable 3.x jina version
         run: |
           JINA_VERSION=$(curl -L -s "https://pypi.org/pypi/jina/json" \
             |  jq  -r '.releases | keys | .[]
-              | select(contains("dev") | not)
-              | select(startswith("2."))' \
+              #| select(contains("dev") | not) TODO uncomment this once jina3 is released
+              | select(startswith("3."))' \
             | sort -V | tail -1)
-          pip install git+https://github.com/jina-ai/jina.git@v${JINA_VERSION}
+          pip install jina==${JINA_VERSION}
       - name: Python requirements
         run: |
           if [ -f requirements.txt ]; then
