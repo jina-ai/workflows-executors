@@ -5,7 +5,7 @@ on:
 
 jobs:
   gpu-tests:
-    runs-on: [self-hosted, gpu]
+    runs-on: [self-hosted, x64, gpu, linux]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
