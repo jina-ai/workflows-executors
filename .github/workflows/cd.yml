@@ -35,7 +35,7 @@ jobs:
       - name: push to Hubble
         if: ${{ inputs.event_name == 'release' }}
         id: push_exec_custom
-        uses: jina-ai/action-hubble-push@v4
+        uses: jina-ai/action-hubble-push@v6
         env:
           exec_secret: ${{ secrets.secret }}
         with:
@@ -43,7 +43,7 @@ jobs:
       - name: push to Hubble
         if: ${{ inputs.event_name != 'release' }}
         id: push_exec_action
-        uses: jina-ai/action-hubble-push@v4
+        uses: jina-ai/action-hubble-push@v6
         env:
           exec_secret: ${{ secrets.secret }}
         with:
