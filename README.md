@@ -3,13 +3,11 @@
 Call these workflows remotely from your Executor's repo
 
 ## Add via workflow template
-1. Add your secret as `EXECUTOR_SECRET`
-2. Follow the instructions at [Jina Workflow Templates](https://github.com/jina-ai/.github)
+1. Follow the instructions at [Jina Workflow Templates](https://github.com/jina-ai/.github)
 
 ## Add via copy-paste
 
-1. Add your secret as `EXECUTOR_SECRET`
-2. add `.github/workflows/cd.yml` with the following:
+1. add `.github/workflows/cd.yml` with the following:
 
 ```yaml
 name: CD
@@ -31,7 +29,7 @@ jobs:
     with:
       event_name: ${{ github.event_name }}
     secrets:
-      secret: ${{ secrets.EXECUTOR_SECRET }}
+      jinahub_token: ${{ secrets.JINAHUB_TOKEN }}
 ```
 
 3. add `.github/workflows/ci.yml` with the following:
