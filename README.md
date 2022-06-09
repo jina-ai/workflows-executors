@@ -32,7 +32,7 @@ jobs:
       jinahub_token: ${{ secrets.JINAHUB_TOKEN }}
 ```
 
-3. add `.github/workflows/ci.yml` with the following:
+2. add `.github/workflows/ci.yml` with the following:
 
 ```yaml
 name: CI
@@ -44,7 +44,7 @@ jobs:
     uses: jina-ai/workflows-executors/.github/workflows/ci.yml@master
 ```
 
-4. [optional] add `.github/workflows/ci-gpu.yml` with the following:
+3. [optional] add `.github/workflows/ci-gpu.yml` with the following:
 
 ```yaml
 name: CI-GPU
