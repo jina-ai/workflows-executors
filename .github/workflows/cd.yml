@@ -6,6 +6,10 @@ on:
       event_name:
         required: true
         type: string
+      executor_dir:
+        required: false
+        type: string
+        default: "."
     secrets:
       secret:
         required: false
@@ -37,18 +41,20 @@ jobs:
       - name: push to Hubble
         if: ${{ inputs.event_name == 'release' }}
         id: push_exec_custom
-        uses: jina-ai/action-hubble-push@v7
+        uses: jina-ai/action-hubble-push@v8
         env:
           exec_secret: ${{ secrets.secret }}
           jinahub_token: ${{ secrets.jinahub_token }}
         with:
           git_tag: ${{ steps.previous_tag_custom.outputs.tag }}
+          push_dir: ${{ inputs.executor_dir }}
       - name: push to Hubble
         if: ${{ inputs.event_name != 'release' }}
         id: push_exec_action
-        uses: jina-ai/action-hubble-push@v7
+        uses: jina-ai/action-hubble-push@v8
         env:
           exec_secret: ${{ secrets.secret }}
           jinahub_token: ${{ secrets.jinahub_token }}
         with:
           git_tag: ${{ steps.previous_tag_action.outputs.tag }}
+          push_dir: ${{ inputs.executor_dir }}

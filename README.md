@@ -31,6 +31,32 @@ jobs:
     secrets:
       jinahub_token: ${{ secrets.JINAHUB_TOKEN }}
 ```
+Optionally you can specify a directory with the executor project. By default it
+is set to `./`.
+
+```yaml
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - created
+  workflow_dispatch:
+  # pull_request:
+  # uncomment the above to test CD in a PR
+
+jobs:
+  call-external:
+    uses: jina-ai/workflows-executors/.github/workflows/cd.yml@master
+    with:
+      event_name: ${{ github.event_name }}
+      executor_dir: "path/to/executor/project"
+    secrets:
+      jinahub_token: ${{ secrets.JINAHUB_TOKEN }}
+```
 
 2. add `.github/workflows/ci.yml` with the following:
 
