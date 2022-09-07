@@ -14,12 +14,7 @@ jobs:
           python-version: "3.7"
       - name: Install latest stable 3.x jina version
         run: |
-          JINA_VERSION=$(curl -L -s "https://pypi.org/pypi/jina/json" \
-            |  jq  -r '.releases | keys | .[]
-              #| select(contains("dev") | not) TODO uncomment this once jina3 is released
-              | select(startswith("3."))' \
-            | sort -V | tail -1)
-          pip install jina==${JINA_VERSION}
+          pip install jina
       - name: Python requirements
         run: pip install -r gpu_requirements.txt -r tests/requirements.txt
       - name: Run GPU tests
