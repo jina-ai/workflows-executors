@@ -28,9 +28,9 @@ jobs:
       - name: Get previous tag
         if: ${{ inputs.event_name != 'release' }}
         id: previous_tag_action
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
         with:
-          fallback: ""
+          fallback: 'latest'
         # this only works for newly released tags
       - name: Get the version we just released
         if: ${{ inputs.event_name == 'release' }}
