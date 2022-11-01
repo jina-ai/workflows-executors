@@ -9,7 +9,7 @@ on:
       executor_dir:
         required: false
         type: string
-        default: "."
+        default: 'default_dir'
     secrets:
       secret:
         required: false
