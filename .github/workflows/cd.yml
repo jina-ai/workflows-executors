@@ -48,9 +48,6 @@ jobs:
         with:
           git_tag: ${{ steps.previous_tag_custom.outputs.tag }}
           push_dir: ${{ inputs.executor_dir }}
-      - name: debug
-        run: |
-          echo executor_dir ${{ inputs.executor_dir }}
       - name: push to Hubble without release
         if: ${{ inputs.event_name != 'release' }}
         id: push_exec_action
