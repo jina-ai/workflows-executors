@@ -38,10 +38,10 @@ jobs:
         run: |
           [[ ! "$GITHUB_REF" =~ refs/tags ]] && exit
           echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
-      - name: push to Hubble
+      - name: push to Hubble with release
         if: ${{ inputs.event_name == 'release' }}
         id: push_exec_custom
-        uses: jina-ai/action-hubble-push@v8
+        uses: jina-ai/action-hubble-push@fix-inputs-1
         env:
           exec_secret: ${{ secrets.secret }}
           jinahub_token: ${{ secrets.jinahub_token }}
@@ -51,7 +51,7 @@ jobs:
       - name: debug
         run: |
           echo executor_dir ${{ inputs.executor_dir }}
-      - name: push to Hubble
+      - name: push to Hubble without release
         if: ${{ inputs.event_name != 'release' }}
         id: push_exec_action
         uses: jina-ai/action-hubble-push@fix-inputs-1
