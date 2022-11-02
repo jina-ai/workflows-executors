@@ -9,7 +9,7 @@ on:
       executor_dir:
         required: false
         type: string
-        default: "."
+        default: '.'
     secrets:
       secret:
         required: false
@@ -28,9 +28,9 @@ jobs:
       - name: Get previous tag
         if: ${{ inputs.event_name != 'release' }}
         id: previous_tag_action
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
         with:
-          fallback: ""
+          fallback: 'latest'
         # this only works for newly released tags
       - name: Get the version we just released
         if: ${{ inputs.event_name == 'release' }}
@@ -38,20 +38,20 @@ jobs:
         run: |
           [[ ! "$GITHUB_REF" =~ refs/tags ]] && exit
           echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
-      - name: push to Hubble
+      - name: push to Hubble with release
         if: ${{ inputs.event_name == 'release' }}
         id: push_exec_custom
-        uses: jina-ai/action-hubble-push@v8
+        uses: jina-ai/action-hubble-push@v9
         env:
           exec_secret: ${{ secrets.secret }}
           jinahub_token: ${{ secrets.jinahub_token }}
         with:
           git_tag: ${{ steps.previous_tag_custom.outputs.tag }}
           push_dir: ${{ inputs.executor_dir }}
-      - name: push to Hubble
+      - name: push to Hubble without release
         if: ${{ inputs.event_name != 'release' }}
         id: push_exec_action
-        uses: jina-ai/action-hubble-push@v8
+        uses: jina-ai/action-hubble-push@v9
         env:
           exec_secret: ${{ secrets.secret }}
           jinahub_token: ${{ secrets.jinahub_token }}
