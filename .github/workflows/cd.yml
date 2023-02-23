@@ -10,6 +10,11 @@ on:
         required: false
         type: string
         default: '.'
+      platform:
+        description: 'Platform parameter of jina hub push; "amd64" or "arm64,amd64" or "arm64"'
+        required: false
+        default: 'amd64' 
+        type: string
     secrets:
       secret:
         required: false
@@ -48,6 +53,7 @@ jobs:
         with:
           git_tag: ${{ steps.previous_tag_custom.outputs.tag }}
           push_dir: ${{ inputs.executor_dir }}
+          platform: ${{ inputs.platform }}
       - name: push to Hubble without release
         if: ${{ inputs.event_name != 'release' }}
         id: push_exec_action
@@ -58,3 +64,4 @@ jobs:
         with:
           git_tag: ${{ steps.previous_tag_action.outputs.tag }}
           push_dir: ${{ inputs.executor_dir }}
+          platform: ${{ inputs.platform }}
