@@ -21,6 +21,9 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: "3.7"
+      - name: Install pytest
+        run: |
+          pip install pytest
       - name: Pre-test script
         run: |
           if [[ -f "tests/pre_test.sh" ]]; then
