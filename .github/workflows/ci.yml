@@ -8,6 +8,11 @@ on:
         type: string
         required: false
         default: amd64
+      pytest:
+        description: Weather to run python test
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   tests:
@@ -18,20 +23,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - if: ${{ inputs.pytest }}
+        uses: actions/setup-python@v2
         with:
           python-version: "3.7"
-      - name: Install pytest
-        run: |
-          pip install pytest
-      - name: Pre-test script
+      - if: ${{ inputs.pytest }}
+        name: Pre-test script
         run: |
           if [[ -f "tests/pre_test.sh" ]]; then
             bash tests/pre_test.sh; fi
-      - name: Install latest stable 3.x jina version
+      - if: ${{ inputs.pytest }}
+        name: Install latest stable 3.x jina version
         run: |
           pip install jina
-      - name: Python requirements
+      - if: ${{ inputs.pytest }}
+        name: Python requirements
         run: |
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt ; fi
@@ -43,7 +49,8 @@ jobs:
             docker run --entrypoint="executor_manager" -v "$(pwd):/workspace" \
             jinahub/hubble-normalizer:latest normalize . --jina-version=3
             sudo chown -R $(id -u ${USER}):$(id -g ${USER}) . ; fi
-      - name: Run unit tests
+      - if: ${{ inputs.pytest }}
+        name: Run unit tests
         run: python -m pytest -s -v -m "not gpu"
       - id: test_docker
         name: run docker tests
